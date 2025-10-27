@@ -27,7 +27,6 @@ def main():
 
     master_priv = None
     chaincode = None
-    mnemonic = None
 
     if choice == "1":
         entropy = generate_entropy()
@@ -43,16 +42,15 @@ def main():
         master_priv, chaincode = derive_from_mnemonic(mnemonic_input)
 
     elif choice == "3":
-        # Need master keys first
-        mnemonic_input = input("\nEnter your 12 mnemonic words (or press Enter to use master keys from recent run):\n> ").strip()
+        mnemonic_input = input("\nEnter your 12 mnemonic words (or press Enter to paste later):\n> ").strip()
         if mnemonic_input:
             mnemonic_input = mnemonic_input.split()
             master_priv, chaincode = derive_from_mnemonic(mnemonic_input)
         else:
-            print("No mnemonic provided; you must have generated/imported earlier in this session.")
+            print("You must provide a mnemonic now (or use option 1/2 first).")
             return
 
-        idx = int(input("Enter index (use >= 0x80000000 for hardened, or provide in decimal): ").strip(), 0)
+        idx = int(input("Enter index (use >= 0x80000000 for hardened; hex OK with 0x...): ").strip(), 0)
         child_priv, child_chain = derive_child_key(master_priv, chaincode, idx)
         print("\n=== CHILD KEY ===")
         print("Index:", idx)
@@ -60,12 +58,12 @@ def main():
         print("Child Chain Code:", binascii.hexlify(child_chain).decode())
 
     elif choice == "4":
-        mnemonic_input = input("\nEnter your 12 mnemonic words (or press Enter to use master keys from recent run):\n> ").strip()
+        mnemonic_input = input("\nEnter your 12 mnemonic words (or press Enter to paste later):\n> ").strip()
         if mnemonic_input:
             mnemonic_input = mnemonic_input.split()
             master_priv, chaincode = derive_from_mnemonic(mnemonic_input)
         else:
-            print("No mnemonic provided; you must have generated/imported earlier in this session.")
+            print("You must provide a mnemonic now (or use option 1/2 first).")
             return
 
         idx = int(input("Enter index (use >= 0x80000000 for hardened): ").strip(), 0)
