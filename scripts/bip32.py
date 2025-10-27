@@ -5,7 +5,6 @@ import hmac, hashlib, struct
 SECP256K1_N = 0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEBAAEDCE6AF48A03BBFD25E8CD0364141
 
 def master_key_from_seed(seed: bytes):
-    """Derive master private key and chain code from seed (BIP-32)."""
     I = hmac.new(b"Bitcoin seed", seed, hashlib.sha512).digest()
     return I[:32], I[32:]
 
@@ -16,13 +15,6 @@ def _bytes32(i: int) -> bytes:
     return i.to_bytes(32, "big")
 
 def derive_child_key(parent_priv: bytes, parent_chaincode: bytes, index: int):
-    """
-    Derive child private key and child chain code (BIP-32).
-    This implementation supports both hardened and non-hardened derivation:
-      - hardened if index >= 0x80000000 (data = 0x00 || priv || index)
-      - non-hardened if index < 0x80000000 (data = pubkey || index) -> requires parent pubkey
-    For simplicity here we implement hardened derivation using private key only.
-    """
     if index < 0:
         raise ValueError("index must be non-negative")
 
@@ -40,7 +32,6 @@ def derive_child_key(parent_priv: bytes, parent_chaincode: bytes, index: int):
     parse_IL = _int_from_32(IL)
     k_par = _int_from_32(parent_priv)
 
-    # child private key = (IL + k_par) mod n
     child_priv_int = (parse_IL + k_par) % SECP256K1_N
     child_priv = _bytes32(child_priv_int)
     child_chaincode = IR
