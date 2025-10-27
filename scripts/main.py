@@ -1,4 +1,3 @@
-# scripts/main.py
 from bip39 import generate_entropy, entropy_to_mnemonic
 from bip32 import master_key_from_seed, derive_child_key
 import hashlib, binascii, os
