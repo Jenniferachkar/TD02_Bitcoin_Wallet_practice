@@ -1,10 +1,15 @@
 from bip39 import generate_entropy, entropy_to_mnemonic
 from bip32 import master_key_from_seed
 import hashlib, binascii
+import os
 
 def main():
-    with open("bip39_english.txt") as f:
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    wordlist_path = os.path.join(script_dir, "bip39_english.txt")
+
+    with open(wordlist_path, "r") as f:
         wordlist = [w.strip() for w in f.readlines()]
+
 
     entropy = generate_entropy()
     print("\n=== STEP 1: RANDOM ENTROPY ===")
