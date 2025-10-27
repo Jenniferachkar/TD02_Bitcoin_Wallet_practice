@@ -3,7 +3,7 @@ from bip32 import master_key_from_seed
 import hashlib, binascii
 
 def main():
-    with open("scripts/bip39_english.txt") as f:
+    with open("bip39_english.txt") as f:
         wordlist = [w.strip() for w in f.readlines()]
 
     entropy = generate_entropy()
