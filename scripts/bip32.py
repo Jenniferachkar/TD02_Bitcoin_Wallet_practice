@@ -1,39 +1,31 @@
-# scripts/bip32.py
 import hmac, hashlib, struct
+import ecdsa, binascii
 
-# secp256k1 curve order (n)
-SECP256K1_N = 0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEBAAEDCE6AF48A03BBFD25E8CD0364141
+BIP32_PRIV = b"\x04\x88\xAD\xE4"
+BIP32_PUB  = b"\x04\x88\xB2\x1E"
 
-def master_key_from_seed(seed: bytes):
-    """Derive master private key and chain code from seed (BIP-32)."""
-    I = hmac.new(b"Bitcoin seed", seed, hashlib.sha512).digest()
-    return I[:32], I[32:]
+def hmac_sha512(key, data):
+    return hmac.new(key, data, hashlib.sha512).digest()
 
-def _int_from_32(b: bytes) -> int:
-    return int.from_bytes(b, "big")
+def generate_master_key(seed):
+    I = hmac_sha512(b"Bitcoin seed", seed)
+    master_priv, master_chain = I[:32], I[32:]
+    return master_priv, master_chain
 
-def _bytes32(i: int) -> bytes:
-    return i.to_bytes(32, "big")
+def private_to_public(privkey):
+    sk = ecdsa.SigningKey.from_string(privkey, curve=ecdsa.SECP256k1)
+    vk = sk.verifying_key
+    prefix = b'\x02' if vk.pubkey.point.y() % 2 == 0 else b'\x03'
+    return prefix + vk.to_string("compressed")[1:33]
 
-def derive_child_key(parent_priv: bytes, parent_chaincode: bytes, index: int):
-    if index < 0:
-        raise ValueError("index must be non-negative")
-
-    # For hardened derivation use 0x00 + parent_priv
-    if index >= 0x80000000:
-        data = b"\x00" + parent_priv + struct.pack(">L", index)
+def derive_child_key(parent_priv, parent_chain, index):
+    hardened = index >= 0x80000000
+    if hardened:
+        data = b'\x00' + parent_priv + struct.pack(">L", index)
     else:
-        # Non-hardened derivation requires the parent public key (not implemented here)
-        raise ValueError("Non-hardened derivation requested but parent public key not available. Use hardened (index >= 0x80000000).")
+        pub = private_to_public(parent_priv)
+        data = pub + struct.pack(">L", index)
 
-    I = hmac.new(parent_chaincode, data, hashlib.sha512).digest()
-    IL, IR = I[:32], I[32:]
-
-    parse_IL = _int_from_32(IL)
-    k_par = _int_from_32(parent_priv)
-
-    # child private key = (IL + k_par) mod n
-    child_priv_int = (parse_IL + k_par) % SECP256K1_N
-    child_priv = _bytes32(child_priv_int)
-    child_chaincode = IR
-    return child_priv, child_chaincode
+    I = hmac_sha512(parent_chain, data)
+    child_priv = (int.from_bytes(I[:32], "big") + int.from_bytes(parent_priv, "big")) % ecdsa.SECP256k1.order
+    return child_priv.to_bytes(32, "big"), I[32:]
