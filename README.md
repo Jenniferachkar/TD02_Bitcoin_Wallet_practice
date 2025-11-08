@@ -1,11 +1,12 @@
-# TD02 - Bitcoin Wallet Practice - Jennifer El Achkar (BIP-39 & BIP-32)
+# TD02_Bitcoin Wallet Practice by Jennifer El Achkar (BIP-39 & BIP-32)
+----ENGLISH VERSION BELOW----
 
-## Objective
+## L'objective
 Implement a BIP-39 mnemonic generator and BIP-32 deterministic key derivation, fully reproducible from the command line without precompiled Bitcoin libraries.
 
 ---
 
-##  How to Run
+##  Comment fair
 
 ```bash
 git clone https://github.com/Jenniferachkar/TD02_Bitcoin_Wallet_practice.git
