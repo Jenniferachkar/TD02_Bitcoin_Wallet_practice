@@ -1,0 +1,5 @@
+# === Bitcoin Wallet Project Dependencies ===
+# Install with: pip install -r requirements.txt
+
+ecdsa        # For elliptic curve operations (secp256k1)
+colorama     # For colored CLI output (used in main.py)
