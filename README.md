@@ -34,6 +34,10 @@ source .venv/bin/activate       # macOS / Linux
 pip install -r requirements.txt
 cd scripts
 ```
+<img width="1979" height="296" alt="image" src="https://github.com/user-attachments/assets/50c80524-ba67-4c3e-9326-aafaf67528c0" />
+<img width="2298" height="489" alt="image" src="https://github.com/user-attachments/assets/e91c1028-3a86-4510-839c-c9320c547e6c" />
+
+
 ### Structure du projet
 ```vbnet
 TD02_Bitcoin_Wallet_practice/
@@ -64,7 +68,8 @@ Master Public Key:  02d3...
 Child (m/0) Private Key: ...
 Child (m/0) Chain Code: ...
 ```
-<img width="2301" height="944" alt="image" src="https://github.com/user-attachments/assets/46ffaa5d-dbdb-44f6-92f3-dd732f1dc2fc" />
+<img width="2300" height="1121" alt="image" src="https://github.com/user-attachments/assets/e27a999c-ca59-4f38-bc62-89f6202c308b" />
+<img width="1782" height="536" alt="image" src="https://github.com/user-attachments/assets/0155a603-162b-4493-81cf-5902beaf2504" />
 
 
 
@@ -106,6 +111,8 @@ source .venv/bin/activate       # macOS / Linux
 pip install -r requirements.txt
 cd scripts
 ```
+<img width="1979" height="296" alt="image" src="https://github.com/user-attachments/assets/50c80524-ba67-4c3e-9326-aafaf67528c0" />
+<img width="2298" height="489" alt="image" src="https://github.com/user-attachments/assets/e91c1028-3a86-4510-839c-c9320c547e6c" />
 
 ### Project Structure
 ```vbnet
@@ -136,6 +143,8 @@ Master Public Key:  02d3...
 Child (m/0) Private Key: ...
 Child (m/0) Chain Code: ...
 ```
+<img width="2300" height="1121" alt="image" src="https://github.com/user-attachments/assets/e27a999c-ca59-4f38-bc62-89f6202c308b" />
+<img width="1782" height="536" alt="image" src="https://github.com/user-attachments/assets/0155a603-162b-4493-81cf-5902beaf2504" />
 
 ### Tests & Verification
 Verify the seed on: https://iancoleman.io/bip39/
