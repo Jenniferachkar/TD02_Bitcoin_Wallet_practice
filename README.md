@@ -3,7 +3,7 @@
 
 ---
 
-## <span style="color:#0055A4;">🇫🇷 Version Française</span>
+## <span style="color:#0055A4;"> Version Française (for English Version please see below)</span>
 
 ### <span style="color:#1D1D1D;">Objectif</span>
 Mettre en œuvre un générateur mnémonique conforme à la norme **BIP-39** ainsi qu’une dérivation de clés déterministes **BIP-32**, entièrement reproductibles en ligne de commande, **sans utilisation de bibliothèques Bitcoin précompilées**.
