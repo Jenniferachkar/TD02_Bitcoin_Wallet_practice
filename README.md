@@ -107,21 +107,19 @@ Implement a mnemonic generator compliant with the **BIP-39** standard, as well a
 git clone https://github.com/Jenniferachkar/TD02_Bitcoin_Wallet_practice.git
 cd TD02_Bitcoin_Wallet_Practice
 source .venv/bin/activate       # macOS / Linux
-.\.venv\Scripts\activate        # Windows (PowerShell)
+.\.venv\Scripts\activate        # Windows 
 pip install -r requirements.txt
 cd scripts
 ```
-<img width="1979" height="296" alt="image" src="https://github.com/user-attachments/assets/50c80524-ba67-4c3e-9326-aafaf67528c0" />
-<img width="2298" height="489" alt="image" src="https://github.com/user-attachments/assets/e91c1028-3a86-4510-839c-c9320c547e6c" />
 
 ### Project Structure
 ```vbnet
 TD02_Bitcoin_Wallet_Practice/
     scripts
-        bip39.py              # generation / import / validation of mnemonic
-        bip32.py              # master key, child derivations
-        main.py               # interactive CLI
-        bip39_english.txt     # BIP-39 English word list (2048 words)
+        bip39.py              
+        bip32.py             
+        main.py              
+        bip39_english.txt   
     README.md
 ```
 ### Example of use
@@ -143,9 +141,6 @@ Master Public Key:  02d3...
 Child (m/0) Private Key: ...
 Child (m/0) Chain Code: ...
 ```
-<img width="2300" height="1121" alt="image" src="https://github.com/user-attachments/assets/e27a999c-ca59-4f38-bc62-89f6202c308b" />
-<img width="1782" height="536" alt="image" src="https://github.com/user-attachments/assets/0155a603-162b-4493-81cf-5902beaf2504" />
-
 ### Tests & Verification
 Verify the seed on: https://iancoleman.io/bip39/
 (paste the hex seed or the mnemonic phrase)
